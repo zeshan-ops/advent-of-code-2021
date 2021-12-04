@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <list>
 #include <sstream>
 #include <fstream>
 #include <algorithm>
