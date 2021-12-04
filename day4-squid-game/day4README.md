@@ -14,4 +14,4 @@ The code in its current form only solves part two of the problem. Again, it was 
 - did not investigate if there was any mathematics that would have enabled a simpler soln
 - should get into habit of implementing fuller code rather than code that needs to be changed depending on nature of run
 - a lot of "for" loops. should look up if theres a way to join them together or do smth different.
-
+- a lot of main shouldve been put in own functions 
