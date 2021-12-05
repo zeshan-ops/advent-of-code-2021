@@ -3,13 +3,20 @@
 ## Part 1
 - we will use a grid of integer coordinates
 - we are considering only horizontal or vertical lines, i.e., x1=x2, y1=y2
+- calculate which points lie on the horizontal/vertical lines formed between the pairs of coords, update grid of coords if a point found
 
-### Coding stuff
-- vector<vector<int>> gridCounter: counts how many times a point is touched by a line
+### General Method
+- read a line of the input file
+- get (x1,y1), (x2,y2)
+- if horizontal or vertical, calculate points and update grids
+- repeat for all lines.
+- count number of points that have score > 1 and output
+- end
 
-- the input file is in the form: (x1,y1) -> (x2,y2), so we will use getline to read the input file line by line and then stringstream with ' -> ' as the delimiter.
+-- Part 1 Solved.
 
-- then its a simple matter of updating the gridCounter vector after each line is read.
+## Part 2
+- same exact problem, just consider the diagonal lines, i.e gradient = 1 lines too
 
-### Notes
-- try to write a nicer program than the previous days aka dont be an imbecile
+### General Method
+- exact same as the first part, just need to modify the overlapsUpdater fn and the lineChecker fn to cater for diagonal lines
