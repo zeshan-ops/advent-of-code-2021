@@ -58,6 +58,7 @@ std::vector<int> lineConverter(std::string& line){
 Main program
 */
 int main(int argc, char * argv[]){
+    int dimension;
     std::string inputFilename;
 
     //dealing with command line arguments first
@@ -67,6 +68,17 @@ int main(int argc, char * argv[]){
     if(cmdOptionIndex(argc,argv,"-i")!=0){
         inputFilename = argv[cmdOptionIndex(argc,argv,"-i")+1];
     }
+    else{
+        std::cout << "Error. No input file given" << std::endl;
+        return 1;
+    }
+    if(cmdOptionIndex(argc,argv,"-d")!=0){
+        dimension = (int)argv[cmdOptionIndex(argc,argv,"-d")+1];
+    }
+    else{
+        std::cout << "Error. No grid dimension given." << std::endl;
+        return 1;
+    }
 
     //reading input file
     std::ifstream inputFile(inputFilename);
@@ -75,6 +87,11 @@ int main(int argc, char * argv[]){
     } 
     else{std::cout << "error opening file\n";}
 
+    //intialising overlap vector
+    std::vector<std::vector<int>> overLaps(dimension,
+                                           std::vector<int>(dimension));
+
+    
     return 0;
 
 }
