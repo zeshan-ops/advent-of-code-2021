@@ -25,6 +25,10 @@ int cmdOptionIndex(int& argc, char* argv[], std::string option){
     return optionIndex;
 }
 
+/*
+Program Specific Functions
+*/
+
 //converts a single line of input into x1y1x2y2 in a vector
 std::vector<int> lineConverter(std::string& line){
     std::vector<int> twoPoints;
@@ -52,6 +56,26 @@ std::vector<int> lineConverter(std::string& line){
     twoPoints.push_back(y2);
 
     return twoPoints;
+}
+
+//calculates m and c of the lines, [0] returns m, [1] returns c.
+std::vector<float> lineEquation(int x1,int y1, int x2, int y2){
+    std::vector<float> lineCoeffs;
+    float m;
+    float c;
+    m = (y2-y1)/(x1-x2);
+    c = y1 - m*x1;
+    lineCoeffs.push_back(m);
+    lineCoeffs.push_back(c);
+    return lineCoeffs;
+}
+
+//checks if a point lies on a given line, true if it does, false if not
+bool pointChecker(int x, int y, float m, float c){
+    if(y=(m*x)+c){
+        return true;
+    }
+    else{return false;}
 }
 
 /*
