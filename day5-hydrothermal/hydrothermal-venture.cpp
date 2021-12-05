@@ -62,12 +62,15 @@ std::string lineChecker(int x1, int y1, int x2, int y2){
     else if(y1==y2){
         return "horizontal";
     }
+    else if(abs(y1-y2)==abs(x1-x2)){
+        return "diagonal";
+    }
     else{
         return "nope";
     }
 }
 
-//updates which points occupy the horziontal/vertical lines - part1 specific
+//updates which points occupy the horziontal/vertical lines - part 1 specific
 void overlapsUpdater(std::string orientation, int x1, int y1, int x2, int y2, std::vector<std::vector<int>>& overlaps){
     int startX, endX, startY, endY;
     if(orientation == "horizontal"){
@@ -107,6 +110,39 @@ void overlapsUpdater(std::string orientation, int x1, int y1, int x2, int y2, st
 
 }
 
+//updates which points occupy diagonal lines - part two specific
+void diagonalUpdater(std::string orientation, int x1, int y1, int x2, int y2, std::vector<std::vector<int>>& overlaps){
+    int steps;
+    if(orientation == "diagonal"){
+        steps = abs(x1-x2);
+        if(x2>x1){
+            if(y2>y1){
+                for(int i{0}; i<steps+1;i++){
+                    overlaps[x1+i][y1+i] += 1;
+                }
+            }
+            else if(y1>y2){
+                for(int i{0}; i<steps+1;i++){
+                    overlaps[x1+i][y1-i] +=1;
+                }
+            }
+        }
+        else{
+            if(y2>y1){
+                for(int i{0}; i<steps+1;i++){
+                    overlaps[x1-i][y1+i] += 1;
+                }
+            }
+            else if(y1>y2){
+                for(int i{0}; i<steps+1;i++){
+                    overlaps[x1-i][y1-i] += 1;
+                }
+            }
+        }
+    }
+
+}
+
 //counts the number of points with more than one overlap
 int overlapCounter(std::vector<std::vector<int>>& overlaps, int dimension){
     int overlapCounter{0};
@@ -133,6 +169,7 @@ void boardPrinter(std::vector<std::vector<int>> overlaps,int dimension){
 Main program
 */
 int main(int argc, char * argv[]){
+    int problemPart;
     int dimension;
     std::string inputFilename;
 
@@ -153,6 +190,12 @@ int main(int argc, char * argv[]){
     else{
         std::cout << "Error. No grid dimension given." << std::endl;
         return 1;
+    }
+    if(cmdOptionIndex(argc,argv, "-part")!=0){
+        problemPart = std::stoi(argv[cmdOptionIndex(argc,argv,"-part")+1]);
+    }
+    else{
+        std::cout << "Error. Problem part not chosen" << std::endl;
     }
 
     //accessing input file
@@ -180,7 +223,12 @@ int main(int argc, char * argv[]){
         if(orientation == "nope"){
             continue;
         }
-        overlapsUpdater(orientation, x1,y1,x2,y2, overLaps);
+        if(orientation == "horizontal" || orientation == "vertical"){
+            overlapsUpdater(orientation, x1,y1,x2,y2, overLaps);
+        }
+        if(orientation == "diagonal" && problemPart == 2){
+            diagonalUpdater(orientation,x1,y1,x2,y2,overLaps);
+        }
     }
 
     //counting the number of overlaps > 1 and outputting the result
