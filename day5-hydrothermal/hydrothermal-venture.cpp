@@ -196,6 +196,11 @@ int main(int argc, char * argv[]){
     }
     else{
         std::cout << "Error. Problem part not chosen" << std::endl;
+        return 1;
+    }
+    if(problemPart != 1 && problemPart != 2){
+        std::cout << "Error. Invalid problem part choice" << std::endl;
+        return 1;
     }
 
     //accessing input file
@@ -235,5 +240,4 @@ int main(int argc, char * argv[]){
     std::cout << "Number of overlaps: " << overlapCounter(overLaps,dimension) << std::endl;
     
     return 0;
-
 }
