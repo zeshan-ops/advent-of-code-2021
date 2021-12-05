@@ -20,3 +20,7 @@
 
 ### General Method
 - exact same as the first part, just need to modify the overlapsUpdater fn and the lineChecker fn to cater for diagonal lines
+- because my update method increments the x and y coord to map the points, i need to consider 4 diff scenarions corresponding to 4 diff direction a diagonal line can be in when going from point A to point B.
+- use a single loop variable (i) and just times it by (-1) if need to go in the other direction i guess
+
+-- Part 2 Solved
