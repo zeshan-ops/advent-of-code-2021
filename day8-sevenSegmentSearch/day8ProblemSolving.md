@@ -13,3 +13,6 @@
 ## Part 2
 
 - gotta add all of the output values
+- figure out the segment organisation, lets you figure out which string on the first part of the input corresponds to which number
+- then, match the strings on the second part of the input, regardless of characater order, to the numbers deduced on the left side
+- the problem becomes how to tell the computer how it should deduce the segment organisation
